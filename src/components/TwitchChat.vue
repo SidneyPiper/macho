@@ -1,33 +1,51 @@
 <template>
-  <div ref="chat" class="overflow-y-auto break-words overscroll-none" @scroll="handleScroll">
-    <TwitchMessage v-for="message in messages" :key="message.id" :text="message.text" :tags="message.tags"
-                   :channel="message.channel"/>
-    <button v-if="paused" @click.prevent="$refs.chat.scrollTo(0, $refs.chat.scrollHeight); msgCounter = 0"
-            class="absolute bottom-4 left-1/2 -translate-x-1/2 border border-black dark:border-stone-200 rounded-md px-4 py-2 bg-white dark:bg-stone-950">
-      {{ msgCounter > 0 ? msgCounter + " new messages" : "Chat paused" }}
-    </button>
+  <div>
+    <div>
+      <input v-model="new_channel" type="text" placeholder="New channel"/>
+      <button @click="add_new_channel">Add</button>
+    </div>
+    <div ref="chat" class="overflow-y-auto break-words overscroll-none" @scroll="handleScroll">
+      <TwitchMessage v-for="message in messages" :key="message.id" :text="message.text" :tags="message.tags"
+                     :channel="message.channel"/>
+      <button v-if="paused" @click.prevent="$refs.chat.scrollTo(0, $refs.chat.scrollHeight); msgCounter = 0"
+              class="absolute bottom-4 left-1/2 -translate-x-1/2 border border-black dark:border-stone-200 rounded-md px-4 py-2 bg-white dark:bg-stone-950">
+        {{ msgCounter > 0 ? msgCounter + " new messages" : "Chat paused" }}
+      </button>
+    </div>
   </div>
 </template>
 
 <script setup>
-import {ref, onBeforeMount} from 'vue';
+import {ref, onBeforeMount, useTemplateRef, watch} from 'vue';
 import {v4 as uuid4} from 'uuid';
-import createClient from '../services/twitchChat';
 import fetchEmotes from '../services/7tvEmotes';
 import TwitchMessage from './TwitchMessage.vue';
 import {useAppStore} from "@/stores/app.js";
+import tmi from "tmi.js";
 
 const appStore = useAppStore();
-const chat = ref(null)
+const chat = useTemplateRef('chat')
 
 const messages = ref([]);
 const paused = ref(false)
 const msgCounter = ref(0)
 
-onBeforeMount(async () => {
-  const channels = ['Papaplatte'];
+const new_channel = ref()
+const channels = ref([])
+let client = new tmi.Client({channels: channels.value})
+client.connect();
 
-  const client = createClient(channels);
+
+const add_new_channel = () => {
+  channels.value.push(new_channel.value);
+
+  console.log('Test')
+  client.disconnect()
+
+  client = new tmi.Client({channels: channels.value})
+  client.connect();
+
+  console.log('Joined ', channels.value)
 
   client.on('roomstate', async (channel, state) => {
     if (Object.keys(appStore.seven_tv_emotes).length === 0) {
@@ -51,8 +69,8 @@ onBeforeMount(async () => {
         msgCounter.value += 1
       }
     }
-  });
-});
+  })
+}
 
 let oldScroll = 0
 const handleScroll = () => {
