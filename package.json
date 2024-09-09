@@ -12,7 +12,8 @@
     "@heroicons/vue": "^2.1.4",
     "axios": "^1.7.2",
     "tmi.js": "^1.8.5",
-    "vue": "^3.4.29"
+    "vue": "^3.4.29",
+    "vue-router": "4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",
