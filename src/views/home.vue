@@ -17,9 +17,11 @@ import {ChatBubbleLeftRightIcon as Logo} from '@heroicons/vue/24/solid'
 import {onBeforeMount} from "vue";
 import {useAppStore} from "@/stores/app.js";
 
+const appStore = useAppStore();
+
 onBeforeMount(() => {
   if (document.location.hash && document.location.hash.length > 14) {
-    useAppStore().token = document.location.hash.split('&')[0].slice(14)
+    appStore.set_token(document.location.hash.split('&')[0].slice(14))
   }
 })
 </script>Ï

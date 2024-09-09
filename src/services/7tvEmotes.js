@@ -1,33 +1,29 @@
 import axios from 'axios';
 
 const fetchEmotes = async (channelId) => {
-    try {
-        let response = await axios.get('https://7tv.io/v3/emote-sets/63584dd8848525f4dd62b143');
+    let emotes = {}
 
-        let emotes = {}
+    await axios.get('https://7tv.io/v3/emote-sets/63584dd8848525f4dd62b143')
+        .then((response) => {
+            response.data.emotes.forEach(emote => {
+                emotes[emote.name] = emote.data.host.url
+            })
+        }).catch(error => {
+            console.log(error);
+        })
 
-        for (const i in response.data.emotes) {
-            let emote = response.data.emotes[i]
-            emotes[emote.name] = 'https:' + emote.data.host.url + '/2x.webp'
-        }
-
-        try {
-            response = await axios.get('https://7tv.io/v3/users/twitch/' + channelId);
-
+    await axios.get('https://7tv.io/v3/users/twitch/' + channelId)
+        .then((response) => {
             if (response.data.emote_set) {
-                for (const i in response.data.emote_set.emotes) {
-                    let emote = response.data.emote_set.emotes[i]
-                    emotes[emote.name] = 'https:' + emote.data.host.url + '/2x.webp'
-                }
+                response.data.emote_set.emotes.forEach(emote => {
+                    emotes[emote.name] = emote.data.host.url
+                })
             }
-        } catch (error) {
-        }
+        }).catch(error => {
+            console.log(error);
+        })
 
-        return emotes;
-    } catch (error) {
-        console.error('Error fetching 7TV emotes:', error);
-        return [];
-    }
+    return emotes;
 };
 
 export default fetchEmotes;
