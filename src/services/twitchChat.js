@@ -1,13 +1,13 @@
 import tmi from 'tmi.js';
 
 const createClient = (channels) => {
-  const client = new tmi.Client({
-    channels: channels,
-  });
+    const client = new tmi.Client({
+        channels: channels,
+    });
 
-  client.connect();
+    client.connect();
 
-  return client;
+    return client;
 };
 
 export default createClient;
