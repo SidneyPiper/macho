@@ -5,6 +5,9 @@
       <p class="font-semibold">Macho</p>
     </div>
     <div>
+      Faister
+    </div>
+    <div>
       <SunIcon v-if="themeStore.isDarkMode()" class="w-6 h-6" @click="themeStore.setLightMode()"/>
       <MoonIcon v-else class="w-6 h-6" @click="themeStore.setDarkMode()"/>
     </div>

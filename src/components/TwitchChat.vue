@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-y-auto break-words overscroll-none" ref="chat" @scroll="handleScroll">
+  <div ref="chat" class="overflow-y-auto break-words overscroll-none" @scroll="handleScroll">
     <TwitchMessage v-for="message in messages" :key="message.id" :text="message.text" :tags="message.tags"
                    :channel="message.channel"/>
     <button v-if="paused" @click.prevent="$refs.chat.scrollTo(0, $refs.chat.scrollHeight); msgCounter = 0"
@@ -18,11 +18,10 @@ import TwitchMessage from './TwitchMessage.vue';
 import {useAppStore} from "@/stores/app.js";
 
 const appStore = useAppStore();
-
 const chat = ref(null)
+
 const messages = ref([]);
 const paused = ref(false)
-const oldScroll = ref(0)
 const msgCounter = ref(0)
 
 onBeforeMount(async () => {
@@ -55,16 +54,17 @@ onBeforeMount(async () => {
   });
 });
 
+let oldScroll = 0
 const handleScroll = () => {
   const newScroll = chat.value.scrollTop + chat.value.clientHeight
 
-  if (newScroll < oldScroll.value) {
+  if (newScroll < oldScroll) {
     paused.value = true
   } else if (newScroll >= chat.value.scrollHeight) {
     paused.value = false
     msgCounter.value = 0
   }
 
-  oldScroll.value = newScroll
+  oldScroll = newScroll
 }
 </script>
