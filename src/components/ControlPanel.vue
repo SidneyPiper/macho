@@ -14,5 +14,8 @@
 <script setup>
 import {ChatBubbleLeftRightIcon as Logo} from '@heroicons/vue/24/solid'
 import {MoonIcon, SunIcon} from '@heroicons/vue/24/outline'
-import {themeStore} from '@/services/theme';
+import {useThemeStore} from "@/stores/theme.js";
+
+const themeStore = useThemeStore();
+
 </script>
