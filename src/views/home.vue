@@ -8,34 +8,25 @@
        href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=oe33kkiax4rchm0eelzlbradrr8zur&redirect_uri=http://localhost:5173&scope=">Login
       with Twitch</a>
     <router-link to="/chat">chat</router-link>
-    <div>{{ response }}</div>
   </div>
-
 </template>
 
 <script setup>
 import {ChatBubbleLeftRightIcon as Logo} from '@heroicons/vue/24/solid'
-import {onBeforeMount, ref} from "vue";
-import {useAppStore} from "@/stores/app.js";
-import axios from "axios";
+import {onBeforeMount} from "vue";
+import {useRouter} from "vue-router";
+import {set_token} from "@/stores/token.js";
 
-const appStore = useAppStore();
-
-const response = ref()
+const router = useRouter();
 
 onBeforeMount(async () => {
-  if (document.location.hash && document.location.hash.length > 14) {
-    appStore.set_token(document.location.hash.split('&')[0].slice(14))
+  const hash = document.location.hash
+  const params = new URLSearchParams(hash.substring(1))
+  const access_token = params.get("access_token")
+
+  if (access_token) {
+    set_token(access_token)
+    await router.push('chat')
   }
-
-  /*
-  response.value = await axios.get("https://api.twitch.tv/helix/users?login=papaplatte", {
-    headers: {
-      'Authorization': `Bearer ${appStore.token}`,
-      'Client-Id': 'oe33kkiax4rchm0eelzlbradrr8zur'
-    }
-  })
-   */
-
 })
 </script>Ï
