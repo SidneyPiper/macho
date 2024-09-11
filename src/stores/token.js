@@ -21,4 +21,8 @@ async function is_token_valid() {
     }
 }
 
-export {set_token, get_token, is_token_valid}
+function logout() {
+    localStorage.twitch_token = null
+}
+
+export {set_token, get_token, is_token_valid, logout}

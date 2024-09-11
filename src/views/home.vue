@@ -7,7 +7,6 @@
     <a class="border border-red-600 rounded-md py-2 px-5"
        href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=oe33kkiax4rchm0eelzlbradrr8zur&redirect_uri=http://localhost:5173&scope=">Login
       with Twitch</a>
-    <router-link to="/chat">chat</router-link>
   </div>
 </template>
 

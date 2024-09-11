@@ -1,7 +1,7 @@
 <template>
-  <div id="app" class="h-screen flex flex-col items-stretch dark:bg-stone-950 dark:text-stone-200 font-montserrat">
-    <ControlPanel class="shrink-0 px-2" :client="client"/>
-    <TwitchChat ref="twitch_chat" class="grow p-4" :messages="messages"/>
+  <div id="app" class="flex h-dvh flex-col items-stretch dark:bg-stone-950 dark:text-stone-200 font-montserrat">
+    <ControlPanel class="fixed px-2 bg-white dark:bg-stone-950" :client="client"/>
+    <TwitchChat ref="twitch_chat" class="grow p-4 pt-16" :messages="messages"/>
   </div>
 </template>
 
