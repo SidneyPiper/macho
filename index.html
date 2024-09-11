@@ -8,17 +8,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="apple-touch-icon" href="/icons/apple-icon-180.png">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <!-- Link to the manifest file -->
     <link rel="manifest" href="/manifest.json"/>
 
     <!-- Add a theme color for the browser UI -->
-    <meta name="theme-color" content="#42b883"/>
+    <meta name="theme-color" content="#0c0a09"/>
+
+    <link rel="apple-touch-icon" href="/icons/apple-icon-180.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <script>
         // On page load or when changing themes, best to add inline in `head` to avoid FOUC
@@ -31,9 +31,8 @@
     <title>Macho</title>
 </head>
 
-<body>
+<body class="overflow-hidden fixed top-0 bottom-0">
 <div id="app"></div>
 <script type="module" src="/src/main.js"></script>
 </body>
-
 </html>

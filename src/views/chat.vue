@@ -1,7 +1,7 @@
 <template>
-  <div id="app" class="flex h-dvh flex-col items-stretch dark:bg-stone-950 dark:text-stone-200 font-montserrat">
+  <div id="app" class="flex h-dvh w-dvw flex-col items-stretch dark:bg-stone-950 dark:text-stone-200 font-montserrat">
     <ControlPanel class="fixed px-2 bg-white dark:bg-stone-950" :client="client"/>
-    <TwitchChat ref="twitch_chat" class="grow p-4 pt-16" :messages="messages"/>
+    <TwitchChat ref="twitch_chat" class="grow p-4 pb-8 pt-20" :messages="messages"/>
   </div>
 </template>
 

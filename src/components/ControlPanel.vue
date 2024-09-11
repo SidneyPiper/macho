@@ -1,50 +1,50 @@
 <template>
   <div
-      class="py-2 border-b border-black dark:border-stone-200 flex flex-col md:flex-row gap-3 w-full justify-between">
+      class="py-2 border-b border-black dark:border-stone-200 flex flex-col md:flex-row gap-3 w-full justify-between md:px-4">
     <div class="flex gap-3 items-center">
-      <div class="flex gap-1 shrink-0">
+      <div class="flex gap-1 shrink-0 items-center px-1">
         <Logo class="w-8 h-8"/>
-        <p class="font-semibold text-2xl">Macho</p>
+        <p class="font-semibold text-2xl hidden md:flex">Macho</p>
       </div>
       <div class="flex grow min-w-0 dark:bg-stone-900 bg-gray-200 rounded-md pl-4">
         <input v-model="channel" type="text" placeholder="New channel"
-               class="grow min-w-0 bg-transparent focus:outline-none"
+               class="grow min-w-0 md:w-64 bg-transparent focus:outline-none py-4"
                @keydown.enter="handle_add_button"/>
         <button @click="handle_add_button"
-                class="py-2 px-4 dark:hover:bg-stone-800 hover:bg-gray-300 rounded-md transition-all shrink-0">
-          <PlusIcon class="w-6 h-6"/>
+                class="px-4 dark:hover:bg-stone-800 hover:bg-gray-300 rounded-md transition-all shrink-0">
+          <PlusIcon class="w-8 h-8 "/>
         </button>
       </div>
       <button @click="mobile_menu = !mobile_menu"
               class="p-2 dark:hover:bg-stone-800 hover:bg-gray-200 rounded-md transition-all shrink-0 md:hidden">
-        <Bars3Icon class="w-6 h-6"/>
+        <Bars3Icon class="w-10 h-10"/>
       </button>
     </div>
     <div :class="mobile_menu ? 'flex': 'hidden'"
          class="md:flex flex-col md:flex-row gap-2 overflow-x-scroll">
       <button v-for="c in active_channels" :key="c"
-              class="flex justify-center dark:bg-stone-900 bg-gray-200 rounded-md py-2 px-4 hover:bg-red-600 hover:text-white transition-all"
+              class="flex justify-center items-center dark:bg-stone-900 bg-gray-200 rounded-md p-4 md:px-6 hover:bg-red-600 hover:text-white transition-all"
               @click="leave_channel(c)">
         {{ c }}
       </button>
     </div>
-    <div :class="mobile_menu ? 'flex': 'hidden'" class="md:flex justify-center items-center relative">
+    <div :class="mobile_menu ? 'flex': 'hidden'" class="md:flex justify-center items-center relative gap-6">
       <IconButton @click="profile_dropdown = !profile_dropdown" class="hidden md:flex w-24">
-        <img class="h-7 w-7 rounded-full" :src="user.img" :alt="user.name">
+        <img class="h-10 w-10 rounded-full" :src="user.img" :alt="user.name">
       </IconButton>
       <IconButton class="flex md:hidden">
-        <img class="h-7 w-7 rounded-full" :src="user.img" :alt="user.name">
+        <img class="h-10 w-10 rounded-full" :src="user.img" :alt="user.name">
       </IconButton>
       <div :class="profile_dropdown ? 'md:flex': 'md:hidden'"
-           class="flex md:items-center md:p-4 md:flex-col md:absolute md:top-14 md:gap-3 dark:md:bg-stone-900 md:bg-gray-200 md:rounded-md">
+           class="flex gap-6 md:items-center md:p-4 md:flex-col md:absolute md:top-20 md:gap-3 dark:md:bg-stone-900 md:bg-gray-200 md:rounded-md">
         <IconButton v-if="themeStore.isDarkMode()" @click="themeStore.setLightMode()">
-          <SunIcon class="w-6 h-6"/>
+          <SunIcon class="w-10 h-10"/>
         </IconButton>
         <IconButton v-else @click="themeStore.setDarkMode()">
-          <MoonIcon class="w-6 h-6"/>
+          <MoonIcon class="w-10 h-10"/>
         </IconButton>
         <IconButton @click="logout(); $router.push('/')">
-          <ArrowRightEndOnRectangleIcon class="w-6 h-6"/>
+          <ArrowRightEndOnRectangleIcon class="w-10 h-10"/>
         </IconButton>
       </div>
     </div>

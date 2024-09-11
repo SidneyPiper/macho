@@ -6,9 +6,9 @@
             @click="handleClick"
             @mouseenter="play_button = true"
             @mouseleave="play_button = false"
-            class="absolute bottom-4 left-1/2 -translate-x-1/2 dark:bg-stone-900 bg-gray-200 rounded-md px-4 py-2">
-      <PlayIcon v-if="play_button" class="w-6 h-6"/>
-      <PauseIcon v-else class="w-6 h-6"/>
+            class="absolute bottom-10 md:bottom-8 left-1/2 -translate-x-1/2 dark:bg-stone-900 bg-gray-200 rounded-md px-4 py-2">
+      <PlayIcon v-if="play_button" class="w-10 h-10"/>
+      <PauseIcon v-else class="w-10 h-10"/>
     </button>
   </div>
 </template>
