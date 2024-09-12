@@ -1,5 +1,5 @@
 <template>
-  <div class="h-dvh w-dvw flex flex-col items-center justify-center gap-8 bg-stone-950">
+  <div class="h-dvh w-dvw flex flex-col items-center justify-center gap-8 bg-stone-950 pb-28">
     <div class="flex gap-1 items-center text-white">
       <Logo class="w-28 h-28"/>
       <p class="font-bold text-6xl">Macho</p>
@@ -13,7 +13,6 @@
         </svg>
       </div>
       Login with Twitch</a>
-
   </div>
 </template>
 
