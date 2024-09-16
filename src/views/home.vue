@@ -5,7 +5,7 @@
       <p class="font-bold text-6xl">Macho</p>
     </div>
     <a class="rounded-md py-2 px-5 bg-[#9146FF] flex text-white gap-4 items-center"
-       href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=oe33kkiax4rchm0eelzlbradrr8zur&redirect_uri=https://192.168.178.64:8080&scope=">
+       href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=oe33kkiax4rchm0eelzlbradrr8zur&redirect_uri=https://chat.saltyyy.dev&scope=">
       <div class="w-6 h-6">
         <svg viewBox="0 0 512 512">
           <path fill="#ffffff"
