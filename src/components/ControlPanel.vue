@@ -21,7 +21,7 @@
       </button>
     </div>
     <div :class="mobile_menu ? 'flex': 'hidden'"
-         class="md:flex flex-col md:flex-row gap-2 overflow-x-scroll">
+         class="md:flex flex-col md:flex-row gap-2 overflow-auto">
       <button v-for="c in active_channels" :key="c"
               class="flex justify-center items-center dark:bg-stone-900 bg-gray-200 rounded-md p-4 md:px-6 hover:bg-red-600 hover:text-white transition-all"
               @click="leave_channel(c)">
